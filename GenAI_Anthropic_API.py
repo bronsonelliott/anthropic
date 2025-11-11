@@ -1,7 +1,7 @@
 """
-QuickBooks Online GenAI Analysis - Anthropic API Version
+GenAI Analysis - Anthropic API Version
 
-This script analyzes QBO Gross New Subscriptions performance data across multiple timeframes
+This script analyzes New Subscriptions performance data across multiple timeframes
 (WTD, MTD, QTD, YTD) and uses Claude via the Anthropic API to generate insights and prioritize
 anomalies for business stakeholders.
 """
@@ -279,7 +279,7 @@ def generate_daily_brief(anomaly_df, claude_priorities):
 
     # Build report
     report = f"""
-# 📊 QBO Gross New Subscriptions - Daily Intelligence Brief
+# 📊 New Subscriptions - Daily Intelligence Brief
 *Generated: {report_date} at {report_time}*
 
 ---
@@ -331,7 +331,7 @@ def main():
     """Main execution function"""
 
     print("="*100)
-    print(f"QBO GENAI ANALYSIS - ANTHROPIC API")
+    print(f"GENAI ANALYSIS - ANTHROPIC API")
     print(f"ANTHROPIC MODEL: {MODEL_ID}")
     print("="*100)
 
@@ -416,7 +416,7 @@ def main():
 
     anomaly_summary = final_df.to_string(index=False)
 
-    prompt = f"""You are analyzing Gross New Subscriptions performance for QBO (QuickBooks Online).
+    prompt = f"""You are analyzing New Subscriptions performance.
 
 Below are 24 anomalies flagged across 4 timeframes (WTD, MTD, QTD, YTD). Each shows the top 3 wins and bottom 3 losses by absolute impact.
 
@@ -482,7 +482,7 @@ Keep each section tight and scannable. Always label timeframes when citing numbe
     final_report = generate_daily_brief(final_df, response)
     
     now = datetime.now()
-    filename = f'qbo_intelligence_brief_{now.strftime("%Y%m%d")}.txt'
+    filename = f'intelligence_brief_{now.strftime("%Y%m%d")}.txt'
     try:
         with open(filename, 'w') as f:
             f.write(final_report)
